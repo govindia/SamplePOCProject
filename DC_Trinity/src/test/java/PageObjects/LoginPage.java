@@ -25,11 +25,11 @@ public class LoginPage{
 		return this;
 	}
 
-	public LoginPage setPassword(String pass) {
+	public TrinityBasePage setPassword(String pass) {
 		password.clear();
 		password.sendKeys(pass);
 		password.sendKeys(Keys.ENTER);
-		return this;
+		return new TrinityBasePage();
 	}
 
 	 

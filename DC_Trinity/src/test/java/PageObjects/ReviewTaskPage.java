@@ -1,5 +1,7 @@
 package PageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +16,9 @@ public class ReviewTaskPage {
 	@FindBy(id="opRDIssue")
 	private WebElement issue;
 	
+	@FindBy(id="opRDTNumber")
+	private WebElement tnum;
+
 	@FindBy(id="opRDType")
 	private WebElement type;
 	
@@ -32,9 +37,27 @@ public class ReviewTaskPage {
 	@FindBy(id="opRTaskCreationDate")
 	private WebElement creation;
 	
+	@FindBy(xpath="	.//*[@id='gridDetailsContainer']//button")
+	private List<WebElement> buttons;
+
+	
 	
 	public ReviewTaskPage(){
 		PageFactory.initElements(DriverObjectFactory.getDriver(), this);
 }
 
+	public boolean approveAll() {
+		
+		for(WebElement button :buttons) {
+			button.getAttribute("Approve Selected");
+		}
+		
+		return true;
+	}
+	
+	public boolean rejectAll() {
+			
+			return true;
+		}
+	
 }

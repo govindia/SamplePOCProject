@@ -14,7 +14,7 @@ public class DriverObjectFactory {
 
    public static WebDriver driver;
    public static WebDriverWait dwait;
-   public   WebDriverWait wait;
+   public WebDriverWait wait;
    public static Actions actions;
 
     @BeforeSuite
@@ -22,6 +22,7 @@ public class DriverObjectFactory {
     	System.out.println("executing BeforeSuite");
     	System.setProperty("webdriver.chrome.driver","C:\\Users\\govinda.gupta\\git\\DC Trinity\\DC_Trinity\\drivers\\chromedriver.exe");
         driver =new ChromeDriver(); 
+        actions=new Actions(driver);
         dwait=new WebDriverWait(driver,360,500);
     }
 
@@ -41,7 +42,7 @@ public class DriverObjectFactory {
     }
     
     public static Actions getActionObject() {
-    	actions=new Actions(driver);
+    	
     	return  actions;
     } 
    @AfterMethod

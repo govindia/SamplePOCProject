@@ -21,5 +21,6 @@ public class LoginTest extends BaseTest {
 	@Test(priority=2)
 	public void navigation() {
 		tbp.navigatetoTab("Projects");
+		tbp.navigatetoProject("Joe's PP Project","2");
 	}
 }

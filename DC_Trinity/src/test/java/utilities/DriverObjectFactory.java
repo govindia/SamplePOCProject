@@ -1,4 +1,4 @@
-package driverFactory;
+package utilities;
 
 import org.openqa.selenium.WebDriver;
 
@@ -17,7 +17,7 @@ public class DriverObjectFactory {
    public WebDriverWait wait;
    public static Actions actions;
 
-    @BeforeSuite
+  // @BeforeSuite
     public static void instantiateDriverObject() {
     	System.out.println("executing BeforeSuite");
     	System.setProperty("webdriver.chrome.driver","C:\\Users\\govinda.gupta\\git\\DC Trinity\\DC_Trinity\\drivers\\chromedriver.exe");

@@ -24,13 +24,40 @@
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <testFailureIgnore>true</testFailureIgnore>
           <systemPropertyVariables>
             <browser>chrome</browser>
           </systemPropertyVariables>
         </configuration>
-      </plugin>
-</plugins>
+      </plugin>  
+   </plugins>
   </build>
+  
+    <pluginRepositories>
+        <pluginRepository>
+            <id>testng-xslt-plugin</id>
+            <url>http://www.cosminaru.ro/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+  
+  <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.testng.xslt</groupId>
+                <artifactId>testng-xslt-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <!--Setting the output directory-->
+                    <outputDir>${project.basedir}/target/site/${project.artifactId}</outputDir>
+                    <!--Setting the testNgXslt.showRuntimeTotals flag-->
+                    <showRuntimeTotals>true</showRuntimeTotals>
+                    <!--Setting the testNgXslt.cssFile parameter. This should be relative to the '${basedir}/target/site/testng-xslt' directory-->
+                    <sortTestCaseLinks>true</sortTestCaseLinks>
+                    <testDetailsFilter>FAIL,PASS,SKIP,CONF</testDetailsFilter>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
   
   
   <dependencies>
@@ -39,11 +66,25 @@
         <artifactId>selenium-java</artifactId>
         <version>3.4.0</version>
     </dependency>   
+    
     <dependency>
 	   <groupId>org.testng</groupId>
 	   <artifactId>testng</artifactId>
 	   <version>6.8</version>
       <scope>test</scope>
     </dependency>    
+    
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.2.17</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
+	<dependency>
+	    <groupId>com.relevantcodes</groupId>
+	    <artifactId>extentreports</artifactId>
+	    <version>2.41.2</version>
+	</dependency>
   </dependencies>
+  
 </project>

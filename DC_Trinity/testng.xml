@@ -3,7 +3,7 @@
   <test name="Regression1">
     <packages>
 			<package name="DC_Comics"/>
-			<package name="driverFactory"/>
+			<package name="utilities"/>
 	</packages>
   </test>
 </suite>

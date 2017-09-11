@@ -1,18 +1,24 @@
 package DC_Comics;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-import driverFactory.DriverObjectFactory;
+import utilities.DriverObjectFactory;
 
 public class BaseTest{
 	
-	@BeforeTest
+	@BeforeMethod
 	public void beforeTest() {
-		
+		DriverObjectFactory.instantiateDriverObject();
 		DriverObjectFactory.getDriver().get("https://otbpm.sta.pub.dcentertainment.com/home/warnerbros/psa/index.html#");
 		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.urlContains("https://wbid.oktapreview.com/app/"));
 		
+    }
+	
+	@AfterMethod
+	public void afterTest() {
+		DriverObjectFactory.getDriver().quit();
     }
 
 }

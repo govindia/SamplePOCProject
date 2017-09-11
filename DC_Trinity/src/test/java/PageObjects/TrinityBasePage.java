@@ -6,7 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import driverFactory.DriverObjectFactory;
+
+import utilities.DriverObjectFactory;
 
 public class TrinityBasePage {
 	
@@ -30,6 +31,10 @@ public class TrinityBasePage {
 	
 	@FindBy(xpath=".//*[@id='taskGrid']//button//span")
 	private List<WebElement> pagebuttons;
+	
+	@FindBy(xpath=".//*[@id='taskGrid']/div[2]/div/div/div[3]/div[1]/div")
+	private WebElement pagecount;
+	
 	
 	@FindBy(id="dialogBody")
 	private WebElement dialog;
@@ -56,6 +61,7 @@ public class TrinityBasePage {
 				DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(tab));
 				tab.click();
 				b=true;
+				break;
 			}
 		}
 		
@@ -68,92 +74,70 @@ public class TrinityBasePage {
 	
 	public boolean navigatetoProject(String title, String issue) {
 		boolean b=false;
-		//shownrecords("100");
-		
-		for(WebElement pro :prolist) {
-			if(pro.getText().equalsIgnoreCase(title)) {	
-				int i=prolist.indexOf(pro);
-				if (prodetails.get(i*9+1).getText().equals(issue)) {
-				pro.click();
-			    b=true;
-				}
-		     }
-		}
-	   while(navigatetoPage("Next")) {
+		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(prolist.get(3)));
+	    do{
 		   for(WebElement pro :prolist) {
 				if(pro.getText().equalsIgnoreCase(title)) {	
 					int i=prolist.indexOf(pro);
 					if (prodetails.get((i)*9+1).getText().equals(issue)) {
 					pro.click();
-				    b=true;
-					}
+					b=true;
+					break;	    
+				}
 					
-					else 
-						System.out.print("Issue"+issue+"for Title"+title+"is not available");
-			     }
-				
+			 }
 				else 
-					System.out.print("Title"+title+"is not available");		 
-			}   
-      }   
+					System.out.print("Issue"+issue+"for Title"+title+"is not available");
+							 
+	     }      
+		   System.out.print("Title"+title+"is not available");
+       }while(navigatetoPage("Next"));
 	   return b;  
 	}//End of  navigatetoProject
 	
 	
 //Used to navigate to a task in task list.
 	
-   public boolean navigatetoTask(String task, String title, String issue) {
-		
+   public ReviewTaskPage navigatetoTask(String task,String title, String issue) {
+	   DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
+	   System.out.print("navigateto wait over");
 	   boolean b=false;
-		//shownrecords("100");
-		
-		for(WebElement pro :tasklist) {
-			if(pro.getText().equalsIgnoreCase(task)) {	
-				int i=tasklist.indexOf(pro);
-				if (taskdetails.get(i*10+1).getText().equals(title)&&
-					taskdetails.get(i*10+2).getText().equals(issue)) {
-				
-					pro.click();
-			        b=true;
-				}
-		     }
-		}
-	   while(navigatetoPage("Next")) {
-		   for(WebElement pro :prolist) {
+	   do {
+		   for(WebElement pro :tasklist) {
 			   if(pro.getText().equalsIgnoreCase(task)) {	
 					int i=tasklist.indexOf(pro);
 					if (taskdetails.get(i*10+1).getText().equals(title)&&
-						taskdetails.get(i*10+2).getText().equals(issue)) {
-					
+						taskdetails.get(i*10+2).getText().equals(issue)) {	
 						pro.click();
-				        b=true;
-					}
-					else 
-						System.out.print("Issue"+issue+"for Title"+title+"is not available");
+						b=true;
+						break;       
+					}		
 			     }
-			   else 
-					System.out.print("Title"+title+"is not available");	
-					
-			     }
-				
-					 
-			}  
-	   return b;  
-	}//End of navigatetoTask
+			       System.out.print("Issue"+issue+"for Title"+title+"is not available");				
+			   }		
+		   if(b==true)
+			   break;
+			}while(navigatetoPage("Next"));
+	   if(b==true)  
+		   return new ReviewTaskPage();
+	   else
+	return null;
+	
+   }//End of navigatetoTask
 		
 		
 //privates methods are used by public methods.
    
 	private boolean navigatetoPage(String page) {
 		boolean b=false;
-		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(prolist.get(3)));
+		 DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
 		for(WebElement button :pagebuttons) {
 			if(button.getText().equalsIgnoreCase(page)) {
 			if (button.isEnabled()&&button.isDisplayed()) {
 				button.click();
 				b=true;
+				break;
 		    }
-			
 			else
 				System.out.print("Pagination came to an end or no projects are available");
 		  }

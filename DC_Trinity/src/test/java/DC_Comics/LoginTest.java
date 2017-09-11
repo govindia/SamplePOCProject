@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest {
 		lp= new LoginPage();
 		tbp= lp.setUsername(user).setPassword(password);
 		tbp.navigatetoTab(role+" "+"Tasks");
-		rtp=tbp.navigatetoTask("Review Cover Sketches","TMO_DF_N2","1");
+		rtp=tbp.navigatetoTask("Review Cover Sketches","TMO_DF_ST_Vani1","1");
 		if(decision.equalsIgnoreCase("approve"))
 		rtp.approveAll();	
 		else 

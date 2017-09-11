@@ -74,7 +74,7 @@ public class TrinityBasePage {
 	
 	public boolean navigatetoProject(String title, String issue) {
 		boolean b=false;
-		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(prolist.get(3)));
+		 DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
 	    do{
 		   for(WebElement pro :prolist) {
 				if(pro.getText().equalsIgnoreCase(title)) {	
@@ -100,7 +100,8 @@ public class TrinityBasePage {
 	
    public ReviewTaskPage navigatetoTask(String task,String title, String issue) {
 	   DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
-	   System.out.print("navigateto wait over");
+	   shownrecords();
+	   DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
 	   boolean b=false;
 	   do {
 		   for(WebElement pro :tasklist) {
@@ -112,18 +113,17 @@ public class TrinityBasePage {
 						b=true;
 						break;       
 					}		
-			     }
-			       System.out.print("Issue"+issue+"for Title"+title+"is not available");				
+			     }				
 			   }		
 		   if(b==true)
 			   break;
 			}while(navigatetoPage("Next"));
 	   if(b==true)  
 		   return new ReviewTaskPage();
-	   else
+   else
 	return null;
 	
-   }//End of navigatetoTask
+  }//End of navigatetoTask
 		
 		
 //privates methods are used by public methods.
@@ -135,6 +135,7 @@ public class TrinityBasePage {
 			if(button.getText().equalsIgnoreCase(page)) {
 			if (button.isEnabled()&&button.isDisplayed()) {
 				button.click();
+				DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
 				b=true;
 				break;
 		    }
@@ -142,13 +143,12 @@ public class TrinityBasePage {
 				System.out.print("Pagination came to an end or no projects are available");
 		  }
 		}
-		
 		return b;
 	}
 	
 	
-	private void shownrecords(String n) {
+	private void shownrecords() {
 		Select s=new Select(nrecords);
-		s.selectByValue(n);				
+		s.selectByIndex(0);				
 		}
 }

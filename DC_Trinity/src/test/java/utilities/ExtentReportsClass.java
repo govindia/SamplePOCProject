@@ -35,7 +35,7 @@ public class ExtentReportsClass{
                 //You could find the xml file below. Create xml file in your project and copy past the code mentioned below
                 extent.loadConfig(new File(System.getProperty("user.dir")+"\\extent-config.xml"));
 	}
-		
+		/*
 	@Test
 	public void passTest(){
 		//extent.startTest("TestCaseName", "Description")
@@ -59,7 +59,7 @@ public class ExtentReportsClass{
 	public void skipTest(){
 		logger = extent.startTest("skipTest");
 		throw new SkipException("Skipping - This is not ready for testing ");
-	}
+	}*/
 	
 	@AfterMethod
 	public void getResult(ITestResult result){

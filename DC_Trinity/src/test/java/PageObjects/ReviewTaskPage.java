@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import utilities.DriverObjectFactory;
+import utilities.ScreenshotCapture;
 
 public class ReviewTaskPage {
 	
@@ -54,6 +55,7 @@ public class ReviewTaskPage {
 	//Used to approve all the assets uploaded by Talent.
 	public boolean approveAll() {
 		selectAll();
+		ScreenshotCapture.captureScreenShot();
 		approve();	
 	return true;
 	}//End approveAll
@@ -89,6 +91,7 @@ public class ReviewTaskPage {
 		}
 		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(reviewercomment));
 		reviewercomment.sendKeys("Approved");
+		ScreenshotCapture.captureScreenShot();
 		
 		for(WebElement btn :reviewbtn) {
 			if(btn.getText().equalsIgnoreCase("Yes")) {
@@ -110,7 +113,7 @@ public class ReviewTaskPage {
 		}
 		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(reviewercomment));
 		reviewercomment.sendKeys("Rejected");
-		
+		ScreenshotCapture.captureScreenShot();
 		for(WebElement btn :reviewbtn) {
 			if(btn.getText().equalsIgnoreCase("Yes")) {
 			btn.click();

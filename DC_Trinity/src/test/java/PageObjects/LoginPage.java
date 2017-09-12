@@ -4,8 +4,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import utilities.DriverObjectFactory;
+import utilities.ScreenshotCapture;
+
 
 public class LoginPage{
 
@@ -29,6 +30,7 @@ public class LoginPage{
 		password.clear();
 		password.sendKeys(pass);
 		password.sendKeys(Keys.ENTER);
+		ScreenshotCapture.captureScreenShot();
 		return new TrinityBasePage();
 	}
 

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import utilities.DriverObjectFactory;
+import utilities.ScreenshotCapture;
 
 public class TrinityBasePage {
 	
@@ -35,11 +36,15 @@ public class TrinityBasePage {
 	@FindBy(xpath=".//*[@id='taskGrid']/div[2]/div/div/div[3]/div[1]/div")
 	private WebElement pagecount;
 	
+	@FindBy(xpath=".//*[contains(@class,'ui-dialog-buttonset')]/button/span")
+	private List<WebElement> dialogbuttons;
+	
+	@FindBy(className="AccLoading")
+	private WebElement laoding;
+	
 	
 	@FindBy(id="dialogBody")
 	private WebElement dialog;
-	
-	
 	
 //Constructor to initialize the web elements
 	
@@ -48,15 +53,22 @@ public class TrinityBasePage {
 	}
 	
 	
+//Used to close MFT plugin pop-up
+public void closeMFTDialog() {
+		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(dialog));
+		ScreenshotCapture.captureScreenShot();
+				for (WebElement button : dialogbuttons) {
+					if(button.getText().equalsIgnoreCase("Continue Without Plug-In"))
+						button.click();		
+	 }
+	}
+	
 //Used to navigate to the different tabs available on the left panel.
 	
 	public void navigatetoTab(String name) {
 		boolean b=false;
-		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(dialog));
 		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.invisibilityOf(dialog));
-		
 		for(WebElement tab : leftnav) {
-			
 			if(tab.getAttribute("title").equalsIgnoreCase(name)) {
 				DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.elementToBeClickable(tab));
 				tab.click();
@@ -80,11 +92,11 @@ public class TrinityBasePage {
 				if(pro.getText().equalsIgnoreCase(title)) {	
 					int i=prolist.indexOf(pro);
 					if (prodetails.get((i)*9+1).getText().equals(issue)) {
+					ScreenshotCapture.captureScreenShot();
 					pro.click();
 					b=true;
 					break;	    
-				}
-					
+				}		
 			 }
 				else 
 					System.out.print("Issue"+issue+"for Title"+title+"is not available");
@@ -110,6 +122,7 @@ public class TrinityBasePage {
 					if (taskdetails.get(i*10+1).getText().equals(title)&&
 						taskdetails.get(i*10+2).getText().equals(issue)) {	
 						pro.click();
+						//ScreenshotCapture.captureScreenShot();
 						b=true;
 						break;       
 					}		
@@ -135,7 +148,8 @@ public class TrinityBasePage {
 			if(button.getText().equalsIgnoreCase(page)) {
 			if (button.isEnabled()&&button.isDisplayed()) {
 				button.click();
-				DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(pagecount));
+				 DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.visibilityOf(laoding));
+				 DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.invisibilityOf(laoding));
 				b=true;
 				break;
 		    }
@@ -149,6 +163,9 @@ public class TrinityBasePage {
 	
 	private void shownrecords() {
 		Select s=new Select(nrecords);
-		s.selectByIndex(0);				
+		s.selectByIndex(0);	
+		ScreenshotCapture.captureScreenShot();
 		}
+	
+	
 }

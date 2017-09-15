@@ -32,34 +32,7 @@
       </plugin>  
    </plugins>
   </build>
-  
-    <pluginRepositories>
-        <pluginRepository>
-            <id>testng-xslt-plugin</id>
-            <url>http://www.cosminaru.ro/maven/</url>
-        </pluginRepository>
-    </pluginRepositories>
-  
-  <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.testng.xslt</groupId>
-                <artifactId>testng-xslt-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <!--Setting the output directory-->
-                    <outputDir>${project.basedir}/target/site/${project.artifactId}</outputDir>
-                    <!--Setting the testNgXslt.showRuntimeTotals flag-->
-                    <showRuntimeTotals>true</showRuntimeTotals>
-                    <!--Setting the testNgXslt.cssFile parameter. This should be relative to the '${basedir}/target/site/testng-xslt' directory-->
-                    <sortTestCaseLinks>true</sortTestCaseLinks>
-                    <testDetailsFilter>FAIL,PASS,SKIP,CONF</testDetailsFilter>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-  
-  
+   
   <dependencies>
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
@@ -88,5 +61,4 @@
 	    <version>1.2.5</version>
 	</dependency>
   </dependencies>
-  
 </project>

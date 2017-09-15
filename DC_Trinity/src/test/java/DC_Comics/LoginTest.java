@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import PageObjects.LoginPage;
 import PageObjects.ReviewTaskPage;
 import PageObjects.TrinityBasePage;
+import utilities.ExcelReader;
 import utilities.ReadTestDataConfig;
 
 public class LoginTest extends BaseTest {
@@ -28,7 +29,7 @@ public class LoginTest extends BaseTest {
 		rtp.rejectAll();	
 	}
 	
-	@DataProvider(name="approvers")
+	/*@DataProvider(name="approvers")
 	public Object[][] provideData() {
 		 return new Object[][]{
 			{ "sarah.moore@trinitytest.com","Test1234","Asst Editor","Approve"},
@@ -36,17 +37,13 @@ public class LoginTest extends BaseTest {
 			{"emma.lepeut@trinitytest.com","Test1234","HOD","Approve"},
 		};
 		
-	}
-	
-	/*@Test(priority=2)
-	public void approvalFlow(String user ,String password,String task ,String title, String issue) {
-		
-		lp= new LoginPage();
-		
-		tbp= lp.setUsername(user).setPassword(password);
-		tbp.navigatetoTask(task,title,issue);
-		
 	}*/
+	
+	@DataProvider(name="approvers")
+	public Object[][] provideData() {
+		 String[][] excelData=(String[][]) ExcelReader.getTableArray(System.getProperty("user.dir")+"//TestData.xlsx", ReadTestDataConfig.getTestData("workflow"));
+		 return excelData;
+	}
 	
 	
 }

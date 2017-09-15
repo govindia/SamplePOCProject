@@ -1,4 +1,4 @@
-package PageObjects;
+package pageobjects;
 
 import java.util.List;
 import org.openqa.selenium.WebElement;

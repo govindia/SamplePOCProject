@@ -1,10 +1,11 @@
-package DC_Comics;
+package tests;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import PageObjects.LoginPage;
-import PageObjects.ReviewTaskPage;
-import PageObjects.TrinityBasePage;
+
+import pageobjects.LoginPage;
+import pageobjects.ReviewTaskPage;
+import pageobjects.TrinityBasePage;
 import utilities.ExcelReader;
 import utilities.ReadTestDataConfig;
 

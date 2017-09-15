@@ -12,8 +12,8 @@ public class BaseTest{
 	@BeforeMethod
 	public void beforeTest() {
 		DriverObjectFactory.instantiateDriverObject();
-		DriverObjectFactory.getDriver().get("https://otbpm.sta.pub.dcentertainment.com/home/warnerbros/psa/index.html#");
-		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.urlContains("https://wbid.oktapreview.com/app/"));
+		DriverObjectFactory.getDriver().get("URL");
+		DriverObjectFactory.getDefaultWebDriverWait().until(ExpectedConditions.urlContains("Fwd:URL"));
 		
     }
 	
